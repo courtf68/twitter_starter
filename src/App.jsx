@@ -8,13 +8,15 @@ import { codepathUserProfile, firstTweet, navLinks } from "./constants";
 export default function App() {
   const [userProfile, setUserProfile] = React.useState(codepathUserProfile);
   // UserProfile = codepathUserProfile;
+  console.log(React.useEffect);
+  const [tweets, setTweets] = React.useState([firstTweet]); //starting off arr.
 
   return (
     <div className="app">
       <Navbar navLinks={navLinks} />
       <main>
         <UserProfile userProfile={userProfile} />
-        <Feed />
+        <Feed tweets={tweets} setTweets={setTweets} userProfile={userProfile} />
         <Advertisements />
       </main>
     </div>
