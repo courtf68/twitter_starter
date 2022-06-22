@@ -2,26 +2,26 @@ import * as React from "react";
 import TweetInput from "./TweetInput";
 import "./TweetBox.css";
 
-export default function TweetBox(props) {
+export default function TweetBox({ setTweets, tweets, userProfile }) {
   function handleOnSubmit() {
     var newTweet = {
-      id: props.tweets.length,
-      name: props.userProfile.name,
-      handle: props.userProfile.handle,
+      id: tweets.length,
+      name: userProfile.name,
+      handle: userProfile.handle,
       text: " ",
       comments: 0,
       retweets: 0,
       likes: 0,
     };
-    setTweets(props.tweets[newTweet]);
+    setTweets(tweets.concat(newTweet)); //adding new tweets
   }
   return (
     <div className="tweet-box">
-      <TweetInput {...props} /> {/* value prop + onChange */}
+      <TweetInput /> {/* value prop + onChanges */}
       <div className="tweet-box-footer">
-        <TweetBoxIcons {...props} />
-        <TweetCharacterCount {...props} />
-        <TweetSubmitButton {...handleOnSubmit()} />
+        <TweetBoxIcons />
+        <TweetCharacterCount />
+        <TweetSubmitButton handleOnSubmit={handleOnSubmit} />
       </div>
     </div>
   );
@@ -43,12 +43,12 @@ export function TweetCharacterCount(props) {
   return <span></span>;
 }
 
-export function TweetSubmitButton() {
+export function TweetSubmitButton({ handleOnSubmit }) {
   return (
     <div className="tweet-submit">
       <i className="fas fa-plus-circle"></i>
-      <button className="tweet-submit-button" onClick={handleonSubmit()}>
-        Tweet{" "}
+      <button className="tweet-submit-button" onClick={handleOnSubmit}>
+        Tweet
       </button>
     </div>
   );
