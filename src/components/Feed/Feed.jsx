@@ -17,7 +17,11 @@ export default function Feed(props) {
         </p>
       </div>
 
-      <div className="twitter-feed">{/* ADD CODE HERE */}</div>
+      <div className="twitter-feed">
+        {props.tweets.map((tweet, i) => {
+          return <Tweet tweet={tweet} key={i}></Tweet>;
+        })}
+      </div>
     </div>
   );
 }
