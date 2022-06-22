@@ -6,12 +6,14 @@ import Advertisements from "./components/Advertisements/Advertisements";
 import { codepathUserProfile, firstTweet, navLinks } from "./constants";
 
 export default function App() {
-  // const UserProfile = setUserProfile
+  const [userProfile, setUserProfile] = React.useState(codepathUserProfile);
+  // UserProfile = codepathUserProfile;
+
   return (
     <div className="app">
       <Navbar navLinks={navLinks} />
       <main>
-        <UserProfile />
+        <UserProfile userProfile={userProfile} />
         <Feed />
         <Advertisements />
       </main>

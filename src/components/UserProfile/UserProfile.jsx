@@ -1,17 +1,17 @@
-import * as React from "react"
-import { formatNumTweets, formatNumFollowers } from "../../utils/format"
-import "./UserProfile.css"
+import * as React from "react";
+import { formatNumTweets, formatNumFollowers } from "../../utils/format";
+import "./UserProfile.css";
 
 export default function UserProfile({ userProfile }) {
   return (
     <div className="col user-profile">
       <div className="card">
         <div className="card-bg" />
-        <CardContent />
+        <CardContent userProfile={userProfile.CardContent} />
         <CardFooter />
       </div>
     </div>
-  )
+  );
 }
 
 export function CardContent(props) {
@@ -27,7 +27,7 @@ export function CardContent(props) {
         <p>@{props.handle}</p>
       </div>
     </div>
-  )
+  );
 }
 
 export function CardFooter(props) {
@@ -35,8 +35,12 @@ export function CardFooter(props) {
     <div className="card-footer">
       <p>Tweets</p>
       <p>Followers</p>
-      <span className="metric">{props.numTweets ? formatNumTweets(props.numTweets) : null}</span>
-      <span className="metric">{props.numFollowers ? formatNumFollowers(props.numFollowers) : null}</span>
+      <span className="metric">
+        {props.numTweets ? formatNumTweets(props.numTweets) : null}
+      </span>
+      <span className="metric">
+        {props.numFollowers ? formatNumFollowers(props.numFollowers) : null}
+      </span>
     </div>
-  )
+  );
 }
