@@ -30,7 +30,7 @@ export function NavLink({ navLink }) {
   return (
     <li className={navLink.className}>
       <i className={navLink.icon}></i>
-      <span></span>
+      <span> {navLink.label}</span>
     </li>
   );
 }
