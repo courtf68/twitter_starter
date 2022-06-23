@@ -9,29 +9,41 @@ export default function TweetBox({
   tweetText,
   setTweetText,
 }) {
-  // function handleOnTweetTextChange() {
-  //   onchange = setTweetText {tweets.text}
-  // }
+  function handleOnTweetTextChange(e) {
+    setTweetText(e.target.value); //txt area element
+  }
 
   function handleOnSubmit() {
     var newTweet = {
       id: tweets.length,
       name: userProfile.name,
       handle: userProfile.handle,
-      text: " ",
+      text: tweetText,
       comments: 0,
       retweets: 0,
       likes: 0,
     };
     setTweets(tweets.concat(newTweet)); //adding new tweets
+    setTweetText("");
   }
+  let lengthT = tweetText.length;
+  let disable = false;
   return (
     <div className="tweet-box">
-      <TweetInput value={tweetText} /> {/* value prop + onChanges */}
+      <TweetInput
+        tweets={tweets}
+        value={tweetText}
+        handleOnChange={handleOnTweetTextChange}
+      />
+      {/* value prop + onChanges */}
       <div className="tweet-box-footer">
         <TweetBoxIcons />
-        <TweetCharacterCount />
-        <TweetSubmitButton handleOnSubmit={handleOnSubmit} />
+        <TweetCharacterCount lengthT={lengthT} disable={disable} />
+        <TweetSubmitButton
+          handleOnSubmit={handleOnSubmit}
+          lengthT={lengthT}
+          disable={disable}
+        />
       </div>
     </div>
   );
@@ -48,16 +60,36 @@ export function TweetBoxIcons() {
   );
 }
 
-export function TweetCharacterCount(props) {
-  // ADD CODE HERE
-  return <span></span>;
+export function TweetCharacterCount({ lengthT, disable }) {
+  let color = "black";
+  if (lengthT > 140) {
+    color = "red";
+    disable = true;
+  } else {
+    color = "black";
+  }
+
+  if (lengthT != 0) {
+    return <span color={color}>{140 - lengthT}</span>;
+  } else {
+    disable = true;
+    return <span></span>;
+  }
 }
 
-export function TweetSubmitButton({ handleOnSubmit }) {
+export function TweetSubmitButton({ handleOnSubmit, lengthT }) {
+  let isDisabled = false;
+  if (lengthT === 0 || lengthT > 140) {
+    isDisabled = true;
+  }
   return (
     <div className="tweet-submit">
       <i className="fas fa-plus-circle"></i>
-      <button className="tweet-submit-button" onClick={handleOnSubmit}>
+      <button
+        className="tweet-submit-button"
+        disable={isDisabled}
+        onClick={handleOnSubmit}
+      >
         Tweet
       </button>
     </div>
